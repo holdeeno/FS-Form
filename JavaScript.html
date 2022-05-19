@@ -1,0 +1,45 @@
+<script>
+
+  // Prevent forms from submitting.
+  function preventFormSubmit() {
+    var forms = document.querySelectorAll('form');
+    for (var i = 0; i < forms.length; i++) {
+      forms[i].addEventListener('submit', function(event) {
+      event.preventDefault();
+      });
+    }
+  }
+  window.addEventListener("load", functionInit, true); 
+  
+  // INITIALIZE FUNCTIONS ONLOAD
+  function functionInit(){  
+    preventFormSubmit();
+  };      
+
+
+  
+  // HANDLE FORM SUBMISSIONS
+  var submitCounter = 0; // submitCounter keeps track of the number of form submissions. Set equal to zero on intial form load.
+
+  function handleFormSubmit(formObject) {
+
+    submitCounter++;
+
+
+    if (submitCounter == 1) {
+
+      google.script.run.processInitialEntryForm(formObject);
+      document.getElementById("myForm").reset();
+
+    } else if (submitCounter == 2) {
+
+      google.script.run.processSecondEntryForm(formObject);
+      document.getElementById("myForm").reset();
+    } else if (submitCounter == 3) {
+
+     // google.script.run.processFinalForm(formObject);
+      //document.getElementById("myForm").reset();
+    }
+  }
+
+</script>

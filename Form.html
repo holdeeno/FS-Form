@@ -1,0 +1,24 @@
+<!-- ## The html code of the form goes here -->
+<!-- ## This is included in the Index.html page using "include('Form')" function -->
+
+<form id="myForm" class="p-2 border border-light rounded bg-light" onsubmit="handleFormSubmit(this)">
+    <p class="h4 mb-4 text-center">Fee Schedule Entry Form</p>
+	<p>This is a test</p>
+    <input type="text" id="RecId" name="RecId" value="" style="display: none"> <!-- This generated a unique record ID --> 
+
+	<div class="form-group">
+		<label for="d0120">D0120</label>
+		<input type="number" class="form-control" id="D0120" name="d0120" placeholder="0" required>
+	</div>
+  <div class="form-group">
+		<label for="d0140">D0140</label>
+		<input type="number" class="form-control" id="D0140" name="d0140" placeholder="0" required>
+	</div>
+  <div class="form-group">
+		<label for="d0145">D0145</label>
+		<input type="number" class="form-control" id="D0145" name="d0145" placeholder="0" required>
+	</div>
+
+	<button type="submit" class="btn btn-primary">Submit</button>
+    <input class="btn btn-secondary" type="reset" value="Reset">
+</form>
