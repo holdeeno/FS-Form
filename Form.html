@@ -1,26 +1,298 @@
 <!-- ## The html code of the form goes here -->
 <!-- ## This is included in the Index.html page using "include('Form')" function -->
 
-<form id="myForm" class="p-2 border border-light rounded bg-light" onsubmit="handleFormSubmit(this)">
-    <p class="h4 mb-4 text-center">Fee Schedule Entry Form</p>
-
-	<p class="h6 mb-2">Client Information</p>
+<form id="myForm" class="p-5 border border-light rounded" onsubmit="handleFormSubmit(this)">
+    <p class="h3 mb-2">Fee Schedule Entry Form</p>
 	<hr>
 
     <input type="text" id="RecId" name="RecId" value="" style="display: none"> <!-- This generated a unique record ID --> 
 
+	<!-- Client information group-->
+	<p class="h5 mb-0 pt-4">Client Information</p>
+	<hr>
+
+	<div class="mb-3 pt-2">
+		<label for="formFile" class="form-label">Fee Schedule PDF File Upload</label>
+		<input class="form-control-file form-control-sm" id="formFile" type="file" required>
+		<small id="fileHelp" class="form-text text-muted">Submit the original copy of the Fee Schedule PDF</small>
+	</div>
+	<div class="form-row">
+		<div class="form-group col">
+			<label for="clientID" class="form-label">Unitas Client ID Number</label>
+			<input type="number" class="form-control" id="clientID" name="clientID" readonly>
+		</div>
+		<div class="form-group col">
+			<label for="zipCode" class="form-label">Zip Code</label>
+			<input type="number" class="form-control" id="zipCode" name="zipCode" readonly>
+		</div>
+	</div>
+
+	<!-- Insurance information-->
+	<p class="h5 mb-0 pt-4">Insurance Information</p>
+	<small class="mb-2">Please enter the correct insurance information below.</small>
+	<hr>
+	<div class="form-row">
+		<div class="form-group col">
+			<label for="insuranceCompany" class="form-label">Insurance Company</label>
+			<input type="text" class="form-control" id="insuranceCompany" name="insuranceCompany" required>
+		</div>
+		<div class="form-group col">
+			<label for="insurancePlan" class="form-label">Insurance Plan</label>
+			<input type="text" class="form-control" id="insurancePlan" name="insurancePlan" required>
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col">
+			<label for="feeScheduleType" class="form-label">Fee Schedule Type</label>
+			<input type="text" class="form-control" id="feeScheduleType" name="feeScheduleType" required>
+		</div>
+		<div class="form-group col">
+			<label for="feeScheduleID" class="form-label">Fee Schedule ID</label>
+			<input type="text" class="form-control" id="feeScheduleID" name="feeScheduleID" required>
+		</div>
+	</div>
 	<div class="form-group">
-		<label for="d0120">D0120</label>
-		<input type="number" class="form-control" id="D0120" name="d0120" placeholder="0" required>
+		<label for="effectiveDate">Effective Date</label>
+		<input type="date" class="form-control" id="effectiveDate" name="effectiveDate" required>
 	</div>
-  <div class="form-group">
-		<label for="d0140">D0140</label>
-		<input type="number" class="form-control" id="D0140" name="d0140" placeholder="0" required>
+
+
+	<!-- Procedure Codes-->
+	<p class="h5 pt-4 mb-0">Procedure Code Entry</p>
+	<small class="mb-2">Please enter the correct value for each procedure code below.</small>
+	<hr>
+
+	<!-- D0100-D0999 I. Diagnostic -->
+	<div class="row">
+		<div class="col">
+			<p class="h6">D0100-D0999 I. Diagnostic</p>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label for="D0120">D0120</label>
+				<input type="number" class="form-control" id="D0120" name="D0120" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0140">D0140</label>
+				<input type="number" class="form-control" id="D0140" name="D0140" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0145">D0145</label>
+				<input type="number" class="form-control" id="D0145" name="D0145" placeholder="0" required>
+			</div>
+		</div>
 	</div>
-  <div class="form-group">
-		<label for="d0145">D0145</label>
-		<input type="number" class="form-control" id="D0145" name="d0145" placeholder="0" required>
+
+	<!-- D1000-D1999 II. Preventive -->
+	<div class="row">
+		<div class="col">
+			<p class="h6">D1000-D1999 II. Preventive</p>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label for="D0120">D0120</label>
+				<input type="number" class="form-control" id="D0120" name="D0120" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0140">D0140</label>
+				<input type="number" class="form-control" id="D0140" name="D0140" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0145">D0145</label>
+				<input type="number" class="form-control" id="D0145" name="D0145" placeholder="0" required>
+			</div>
+		</div>
 	</div>
+
+	<!-- D2000-D2999 III. Restorative -->
+	<div class="row">
+		<div class="col">
+			<p class="h6">D2000-D2999 III. Restorative</p>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label for="D0120">D0120</label>
+				<input type="number" class="form-control" id="D0120" name="D0120" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0140">D0140</label>
+				<input type="number" class="form-control" id="D0140" name="D0140" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0145">D0145</label>
+				<input type="number" class="form-control" id="D0145" name="D0145" placeholder="0" required>
+			</div>
+		</div>
+	</div>
+
+	<!-- D3000-D3999 IV. Endodontics -->
+	<div class="row">
+		<div class="col">
+			<p class="h6">D3000-D3999 IV. Endodontics</p>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label for="D0120">D0120</label>
+				<input type="number" class="form-control" id="D0120" name="D0120" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0140">D0140</label>
+				<input type="number" class="form-control" id="D0140" name="D0140" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0145">D0145</label>
+				<input type="number" class="form-control" id="D0145" name="D0145" placeholder="0" required>
+			</div>
+		</div>
+	</div>
+
+	<!-- D4000-D4999 V. Periodontics -->
+	<div class="row">
+		<div class="col">
+			<p class="h6">D4000-D4999 V. Periodontics</p>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label for="D0120">D0120</label>
+				<input type="number" class="form-control" id="D0120" name="D0120" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0140">D0140</label>
+				<input type="number" class="form-control" id="D0140" name="D0140" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0145">D0145</label>
+				<input type="number" class="form-control" id="D0145" name="D0145" placeholder="0" required>
+			</div>
+		</div>
+	</div>
+
+	<!-- D5000-D5899 VI. Prosthodontics, removable -->
+	<div class="row">
+		<div class="col">
+			<p class="h6">D5000-D5899 VI. Prosthodontics, removable</p>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label for="D0120">D0120</label>
+				<input type="number" class="form-control" id="D0120" name="D0120" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0140">D0140</label>
+				<input type="number" class="form-control" id="D0140" name="D0140" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0145">D0145</label>
+				<input type="number" class="form-control" id="D0145" name="D0145" placeholder="0" required>
+			</div>
+		</div>
+	</div>
+
+	<!-- D5900-D5999 VII. Maxillofacial Prosthetics -->
+	<div class="row">
+		<div class="col">
+			<p class="h6">D5000-D5899 VI. Prosthodontics, removable</p>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label for="D0120">D0120</label>
+				<input type="number" class="form-control" id="D0120" name="D0120" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0140">D0140</label>
+				<input type="number" class="form-control" id="D0140" name="D0140" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0145">D0145</label>
+				<input type="number" class="form-control" id="D0145" name="D0145" placeholder="0" required>
+			</div>
+		</div>
+	</div>
+
+	<!-- D6000-D6999 VIII. Implant Services -->
+	<div class="row">
+		<div class="col">
+			<p class="h6">D6000-D6999 VIII. Implant Services</p>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label for="D0120">D0120</label>
+				<input type="number" class="form-control" id="D0120" name="D0120" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0140">D0140</label>
+				<input type="number" class="form-control" id="D0140" name="D0140" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0145">D0145</label>
+				<input type="number" class="form-control" id="D0145" name="D0145" placeholder="0" required>
+			</div>
+		</div>
+	</div>
+
+	<!-- D7000-D7999 X. Oral & Maxillofacial Surgery -->
+	<div class="row">
+		<div class="col">
+			<p class="h6">D7000-D7999 X. Oral & Maxillofacial Surgery</p>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label for="D0120">D0120</label>
+				<input type="number" class="form-control" id="D0120" name="D0120" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0140">D0140</label>
+				<input type="number" class="form-control" id="D0140" name="D0140" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0145">D0145</label>
+				<input type="number" class="form-control" id="D0145" name="D0145" placeholder="0" required>
+			</div>
+		</div>
+	</div>
+
+	<!-- D8000-D8999 XI. Orthodontics -->
+	<div class="row">
+		<div class="col">
+			<p class="h6">D8000-D8999 XI. Orthodontics</p>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label for="D0120">D0120</label>
+				<input type="number" class="form-control" id="D0120" name="D0120" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0140">D0140</label>
+				<input type="number" class="form-control" id="D0140" name="D0140" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0145">D0145</label>
+				<input type="number" class="form-control" id="D0145" name="D0145" placeholder="0" required>
+			</div>
+		</div>
+	</div>
+
+	<!-- D9000-D9999 XII. Adjunctive General Services -->
+	<div class="row">
+		<div class="col">
+			<p class="h6">D9000-D9999 XII. Adjunctive General Services</p>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label for="D0120">D0120</label>
+				<input type="number" class="form-control" id="D0120" name="D0120" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0140">D0140</label>
+				<input type="number" class="form-control" id="D0140" name="D0140" placeholder="0" required>
+			</div>
+			<div class="form-group">
+				<label for="D0145">D0145</label>
+				<input type="number" class="form-control" id="D0145" name="D0145" placeholder="0" required>
+			</div>
+		</div>
+	</div>
+
 
 	<button type="submit" class="btn btn-primary">Submit</button>
     <input class="btn btn-secondary" type="reset" value="Reset">
