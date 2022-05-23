@@ -105,10 +105,17 @@ function processFinalForm(formObject) {
 /* GET FORM VALUES AS AN ARRAY */
 function getFormValues(formObject){
 /* ADD OR REMOVE VARIABLES ACCORDING TO YOUR FORM*/
-  var values = [[new Date().getTime().toString(),//https://webapps.stackexchange.com/a/51012/244121
+  if(formObject.RecId && checkID(formObject.RecId)){
+    var values = [[formObject.RecId.toString(),
                   formObject.d0120,
                   formObject.d0140,
                   formObject.d0145]];
+  } else{
+    var values = [[new Date().getTime().toString(),//https://webapps.stackexchange.com/a/51012/244121
+                  formObject.d0120,
+                  formObject.d0140,
+                  formObject.d0145]];
+  }
   return values;
 }
 
