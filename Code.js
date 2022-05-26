@@ -17,9 +17,11 @@ function globalVariables() {
   return varArray;
 }
 
-/* Testing these for hiding / overwriting third submissions */
-var matchingFieldsList = []; // This will contain an array of all the fields with matching values for the first two submissions
-var id_List = [];
+/* INITIALIZING THE LIST THAT WILL CONTAIN THE MATCHING FIELD NAMES */
+const matchingFieldsList = []; // This will contain an array of all the fields with matching values for the first two submissions
+
+/* INTITIALIZING KEY-VALUE PAIR TO HOLD THE FORM TWO SUBMISSIONS */
+const formTwoArray = new Array(2);
 
 /*
 # PROCESSING FORM -------------------------------------start--------------------------------------------
@@ -36,11 +38,6 @@ function processSecondEntryForm(formObject) {
   // This is going to insert the second entry form data to the Staging Area Google Sheet
   appendData(getFormValues(formObject),globalVariables().spreadsheetId,globalVariables().insertRange);
 
-  // This sends the same data to the final DB sheet.
-  // We are assuming that these values are all correct, and then overwriting the fields 
-  //  that didn't match when the third form is submitted.
-  appendDataFinalSheet(getFormValues(formObject),globalVariables().finalSheetId,globalVariables().insertRange);
-
   // This will retrieve all the data from the Staging Area Google Sheet
   var stagingData = getAllStagingData();
   var finalData = getAllFinalData();
@@ -54,33 +51,38 @@ function processSecondEntryForm(formObject) {
     var fieldName = stagingData[0][col] // This gets the name of the fields we're comparing (header row)
     var initialFormFieldValue = stagingData[1][col]; // This gets the value for that field from the first submission
     var secondFormFieldValue = stagingData[2][col]; // This gets the value for that field from the second submission
-    i++; // increment the iterator
+    i++; // increment
 
     if (initialFormFieldValue == secondFormFieldValue) { // If the values from the two submissions match:
 
       matchingFieldsList.push(fieldName); // Add the name of that field to our global array 'matchingFieldsList'
       Logger.log(matchingFieldsList);
 
-      // for (var outer = 0; outer < finalData.length; outer++){
-      //   for (var inner = 0; inner < finalData[i].length; inner++){
+      // add the key-value pair {fieldName, secondFormValue} to the formTwoArray object
+      const key = fieldName;
+      formTwoArray[key] = secondFormFieldValue;
+      Logger.log(formTwoArray);
 
-      //     @param d1 this is going to be hold the value of each cell.
-      //     var d1 = finalData[outer][inner];
-
-      //     if (d1 == fieldName){
-
+    } else {
+      const key = fieldName;
+      formTwoArray[key] = null;
     }
+      // add the key-value pair {fieldName, null} to the formTwoArray object
   }
   Logger.log(matchingFieldsList);
-  return matchingFieldsList;
+
+  // function getMatchingFieldsList() {
+  //    return matchingFieldsList;
+  // }
+  return matchingFieldsList; 
 }
 
 
 /* PROCESS FINAL ENTRY FORM */
 function processFinalForm(formObject) {
 
-  // if field name is in this list, don't update
-  // else call update function to update the cells for field names that aren't in the list
+  // This sends the same data to the final DB sheet.
+  appendDataFinalSheet(getFormValues(formObject),globalVariables().finalSheetId,globalVariables().insertRange);
 }
 
 /*
