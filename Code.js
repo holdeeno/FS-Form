@@ -18,9 +18,8 @@ function globalVariables() {
 }
 
 /* Testing these for hiding / overwriting third submissions */
-var matchingFieldsList = [];
+var matchingFieldsList = []; // This will contain an array of all the fields with matching values for the first two submissions
 var id_List = [];
-
 
 /*
 # PROCESSING FORM -------------------------------------start--------------------------------------------
@@ -32,18 +31,14 @@ function processInitialEntryForm(formObject){
   appendData(getFormValues(formObject),globalVariables().spreadsheetId,globalVariables().insertRange);
 }
 
-function testFunction(){
-  
-}
-
-
-
-
 /* PROCESS SECOND ENTRY FORM */
-function processSecondEntryForm(formObject){  
-
+function processSecondEntryForm(formObject) {  
+  // This is going to insert the second entry form data to the Staging Area Google Sheet
   appendData(getFormValues(formObject),globalVariables().spreadsheetId,globalVariables().insertRange);
 
+  // This sends the same data to the final DB sheet.
+  // We are assuming that these values are all correct, and then overwriting the fields 
+  //  that didn't match when the third form is submitted.
   appendDataFinalSheet(getFormValues(formObject),globalVariables().finalSheetId,globalVariables().insertRange);
 
   // This will retrieve all the data from the Staging Area Google Sheet
@@ -54,31 +49,27 @@ function processSecondEntryForm(formObject){
   // Set iterator equal to zero
   var i = 0;
  
-  for (var col = 1 ; i < stagingData.length; col++){
+  for (var col = 1 ; i < stagingData.length; col++) {
   
-    var fieldName = stagingData[0][col]
-    var initialFormFieldValue = stagingData[1][col];
-    var secondFormFieldValue = stagingData[2][col];
+    var fieldName = stagingData[0][col] // This gets the name of the fields we're comparing (header row)
+    var initialFormFieldValue = stagingData[1][col]; // This gets the value for that field from the first submission
+    var secondFormFieldValue = stagingData[2][col]; // This gets the value for that field from the second submission
 
-    if (initialFormFieldValue == secondFormFieldValue){ 
+    if (initialFormFieldValue == secondFormFieldValue) { // If the values from the two submissions match:
 
-      matchingFieldsList.push(fieldName);
+      matchingFieldsList.push(fieldName); // Add the name of that field to our global array 'matchingFieldsList'
 
-      for (var outer = 0; outer < finalData.length; outer++){
-        for (var inner = 0; inner < finalData[i].length; inner++){
+      // for (var outer = 0; outer < finalData.length; outer++){
+      //   for (var inner = 0; inner < finalData[i].length; inner++){
 
-          // @param d1 this is going to be hold the value of each cell.
-          var d1 = finalData[outer][inner];
+      //     @param d1 this is going to be hold the value of each cell.
+      //     var d1 = finalData[outer][inner];
 
-          
-          
+      //     if (d1 == fieldName){
 
-          if (d1 == fieldName){
-
-
-          }
-        }
-      }
+    }
+  }
+}
 
 
 
