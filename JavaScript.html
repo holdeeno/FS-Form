@@ -45,12 +45,7 @@
           console.log(element);
           document.getElementById(element).parentNode.style.display = "none";
         }
-
-        // save this array to a variable
-        // iterate through the array
-          // for each value in the array 
-          // get the element by it's id and hide it
-          // document.getElementById(" the id name ").style.display = "none";
+        
       }
       google.script.run.withSuccessHandler(onSuccess).processSecondEntryForm(formObject);
       document.getElementById("myForm").reset();
