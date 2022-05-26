@@ -54,10 +54,12 @@ function processSecondEntryForm(formObject) {
     var fieldName = stagingData[0][col] // This gets the name of the fields we're comparing (header row)
     var initialFormFieldValue = stagingData[1][col]; // This gets the value for that field from the first submission
     var secondFormFieldValue = stagingData[2][col]; // This gets the value for that field from the second submission
+    i++; // increment the iterator
 
     if (initialFormFieldValue == secondFormFieldValue) { // If the values from the two submissions match:
 
       matchingFieldsList.push(fieldName); // Add the name of that field to our global array 'matchingFieldsList'
+      Logger.log(matchingFieldsList);
 
       // for (var outer = 0; outer < finalData.length; outer++){
       //   for (var inner = 0; inner < finalData[i].length; inner++){
@@ -69,17 +71,9 @@ function processSecondEntryForm(formObject) {
 
     }
   }
+  Logger.log(matchingFieldsList);
+  return matchingFieldsList;
 }
-
-
-
-    }
-
-
-  }
-
-}
-
 
 
 /* PROCESS FINAL ENTRY FORM */

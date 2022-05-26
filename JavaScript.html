@@ -36,8 +36,25 @@
 
     } else if (submitCounter == 2) {
 
-      google.script.run.processSecondEntryForm(formObject);
+      // This returns the matching field list array if the server-side function 'processSecondEntryForm()' returns succesfully
+      function onSuccess(matchingFieldsList) { 
+        console.log(matchingFieldsList);
+        const matchingFieldsArray = matchingFieldsList;
+
+        for (const element of matchingFieldsArray) {
+          console.log(element);
+          document.getElementById(element).parentNode.style.display = "none";
+        }
+
+        // save this array to a variable
+        // iterate through the array
+          // for each value in the array 
+          // get the element by it's id and hide it
+          // document.getElementById(" the id name ").style.display = "none";
+      }
+      google.script.run.withSuccessHandler(onSuccess).processSecondEntryForm(formObject);
       document.getElementById("myForm").reset();
+
     } else if (submitCounter == 3) {
 
      // google.script.run.processFinalForm(formObject);
