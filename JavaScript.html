@@ -40,6 +40,9 @@
       function onSuccess(matchingFieldsList) { 
         console.log(matchingFieldsList);
         const matchingFieldsArray = matchingFieldsList;
+      // function onSuccess(matchingFieldsList, formTwoData) {
+        
+      // }
 
         for (const element of matchingFieldsArray) {
           console.log(element);
@@ -49,6 +52,10 @@
       }
       google.script.run.withSuccessHandler(onSuccess).processSecondEntryForm(formObject);
       document.getElementById("myForm").reset();
+      // I will need to first create a key-value pair array that saves the names of the matching field names and their values.
+      // Next, I will use a similar for loop to get the element by it's Id, and use the .value operator to insert the value into the field
+
+      
 
     } else if (submitCounter == 3) {
 
