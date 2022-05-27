@@ -40,8 +40,6 @@ function processSecondEntryForm(formObject) {
 
   // This will retrieve all the data from the Staging Area Google Sheet
   var stagingData = getAllStagingData();
-  var finalData = getAllFinalData();
-  var finalIDName = "";
 
   // Set iterator equal to zero
   var i = 0;
