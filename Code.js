@@ -21,7 +21,7 @@ function globalVariables() {
 const matchingFieldsList = []; // This will contain an array of all the fields with matching values for the first two submissions
 
 /* INTITIALIZING KEY-VALUE PAIR TO HOLD THE FORM TWO SUBMISSIONS */
-const formTwoArray = new Array(2);
+const formTwoArray = [];
 
 /*
 # PROCESSING FORM -------------------------------------start--------------------------------------------
@@ -56,18 +56,18 @@ function processSecondEntryForm(formObject) {
       matchingFieldsList.push(fieldName); // Add the name of that field to our global array 'matchingFieldsList'
       Logger.log(matchingFieldsList);
 
-      // add the key-value pair {fieldName, secondFormValue} to the formTwoArray object
-      const key = fieldName;
-      formTwoArray[key] = secondFormFieldValue;
+      formTwoArray.push([fieldName, secondFormFieldValue]); // Add the field name and it's value to our global array 'formTwoArray'
       Logger.log(formTwoArray);
 
     } else {
-      const key = fieldName;
-      formTwoArray[key] = null;
+
+        formTwoArray.push([fieldName, null]); // Add the field name and a null value to our global array 'formTwoArray'
+        Logger.log(formTwoArray);
     }
-      // add the key-value pair {fieldName, null} to the formTwoArray object
+
   }
   Logger.log(matchingFieldsList);
+  Logger.log(formTwoArray);
 
   // function getMatchingFieldsList() {
   //    return matchingFieldsList;
