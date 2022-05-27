@@ -53,6 +53,7 @@ function processSecondEntryForm(formObject) {
 
     if (initialFormFieldValue == secondFormFieldValue) { // If the values from the two submissions match:
 
+
       matchingFieldsList.push(fieldName); // Add the name of that field to our global array 'matchingFieldsList'
       Logger.log(matchingFieldsList);
 
@@ -69,10 +70,16 @@ function processSecondEntryForm(formObject) {
   Logger.log(matchingFieldsList);
   Logger.log(formTwoArray);
 
-  // function getMatchingFieldsList() {
-  //    return matchingFieldsList;
-  // }
-  return matchingFieldsList; 
+  var secondEntryFormResponses = [matchingFieldsList, formTwoArray];
+  Logger.log(secondEntryFormResponses);
+
+
+  // What if you combine thse two into a single object, and then return the object
+  // Once it's passed to the server, then you can destructure it and save it to two separate variables again
+  // And then you can still use a form loop to hide the fields and a separate loop to fill them
+
+
+  return secondEntryFormResponses;
 }
 
 

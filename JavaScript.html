@@ -37,30 +37,38 @@
     } else if (submitCounter == 2) {
 
       // This returns the matching field list array if the server-side function 'processSecondEntryForm()' returns succesfully
-      function onSuccess(matchingFieldsList) { 
-        console.log(matchingFieldsList);
-        const matchingFieldsArray = matchingFieldsList;
-      // function onSuccess(matchingFieldsList, formTwoData) {
-        
-      // }
+      function onSuccess(secondEntryFormResponses) { 
+        console.log(secondEntryFormResponses);
+        const myMatchingFields = secondEntryFormResponses[0];
+        const myFormTwoArray = secondEntryFormResponses[1];
 
-        for (const element of matchingFieldsArray) {
+        // hide the field
+        for (const element of myMatchingFields) {
           console.log(element);
           document.getElementById(element).parentNode.style.display = "none";
+        }
+        // insert value into 
+        for (const element of myFormTwoArray) {
+          console.log(element);
+          console.log(element[0]);
+          console.log(element[1]);
+          document.getElementById(element[0]).value = element[1];
         }
         
       }
       google.script.run.withSuccessHandler(onSuccess).processSecondEntryForm(formObject);
-      document.getElementById("myForm").reset();
-      // I will need to                                                                          first create a key-value pair array that saves the names of the matching field names and their values.
-      // Next, I will use a similar for loop to get the element by it's Id, and use the .value operator to insert the value into the field
-
-      
+      // document.getElementById("myForm").reset();
 
     } else if (submitCounter == 3) {
 
-     // google.script.run.processFinalForm(formObject);
-      //document.getElementById("myForm").reset();
+      google.script.run.processFinalForm(formObject);
+      document.getElementById("myForm").reset();
+
+      document.getElementById("myForm").style.display = "none"; // hide the form
+      let myElm = document.createElement("p"); // Create a new paragraph element
+      myElm.innerText = "Thanks for filling out the form. You can close this window."; // Add message
+      document.body.appendChild(myElm);
+
     }
   }
 
