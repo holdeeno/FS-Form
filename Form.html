@@ -1,10 +1,23 @@
 <!-- ## The html code of the form goes here -->
 <!-- ## This is included in the Index.html page using "include('Form')" function -->
 
-<form id="myForm" class="p-2 border border-light rounded bg-light" onsubmit="handleFormSubmit(this)">
-    <p class="h4 mb-4 text-center">Fee Schedule Entry Form</p>
-    <input type="text" id="RecId" name="RecId" value="" style="display: none"> <!-- This generated a unique record ID --> 
+<form id="myForm" class="p-5 border border-light rounded" onsubmit="handleFormSubmit(this)">
+    
+	<p class="h3 mb-2">Fee Schedule Entry Form</p>
 
+    <input type="text" id="RecId" name="RecId" value="" style="display: none"> <!-- This generated a unique record ID -->
+
+	<!-- Client information group-->
+	<p class="h5 mb-0 pt-4">Client Information</p>
+	<hr>
+	<!--
+		## Commenting the file upload field until later
+	<div class="mb-3 pt-2">
+		<label for="formFile" class="form-label">Fee Schedule PDF File Upload</label>
+		<input class="form-control-file form-control-sm" id="formFile" type="file" >
+		<small id="fileHelp" class="form-text text-muted">Submit the original copy of the Fee Schedule PDF</small>
+	</div>
+	-->
 	<div class="form-row">
 		<div class="form-group col">
 			<label for="clientID" class="form-label">Unitas Client ID Number</label>
@@ -14,6 +27,35 @@
 			<label for="zipCode" class="form-label">Zip Code</label>
 			<input type="number" class="form-control" id="zipCode" name="zipCode">
 		</div>
+	</div>
+
+	<!-- Insurance information-->
+	<p class="h5 mb-0 pt-4">Insurance Information</p>
+	<small class="mb-2">Please enter the correct insurance information below.</small>
+	<hr>
+	<div class="form-row">
+		<div class="form-group col">
+			<label for="insuranceCompany" class="form-label">Insurance Company</label>
+			<input type="text" class="form-control" id="insuranceCompany" name="insuranceCompany" >
+		</div>
+		<div class="form-group col">
+			<label for="insurancePlan" class="form-label">Insurance Plan</label>
+			<input type="text" class="form-control" id="insurancePlan" name="insurancePlan" >
+		</div>
+	</div>
+	<div class="form-row">
+		<div class="form-group col">
+			<label for="feeScheduleType" class="form-label">Fee Schedule Type</label>
+			<input type="text" class="form-control" id="feeScheduleType" name="feeScheduleType" >
+		</div>
+		<div class="form-group col">
+			<label for="feeScheduleID" class="form-label">Fee Schedule ID</label>
+			<input type="text" class="form-control" id="feeScheduleID" name="feeScheduleID" >
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="effectiveDate">Effective Date</label>
+		<input type="date" class="form-control" id="effectiveDate" name="effectiveDate" >
 	</div>
 
 	<div class="form-group">

@@ -7,11 +7,11 @@ function globalVariables() {
   var varArray = {
     spreadsheetId   : '1T97Qi1knLMUVihs_H7kezvU-lE_IpeRm5VSrqRpTsh4', // Staging Area Google Sheet //** Ref: 
     finalSheetId    : '1Gn4ZbeIpD7_rg_fKp4nZdk59A9AKN99XHWlM9zuCH8U', // Final DB Google Sheet //** Ref: 
-    dataRange       : 'Data!A2:F',                                    // All data, minus header row
-    sheetRange      : 'Data!A1:F',                                   // All data, including header row
+    dataRange       : 'Data!A2:K',                                    // All data, minus header row
+    sheetRange      : 'Data!A1:K',                                   // All data, including header row
     idRange         : 'Data!A2:A',                                    
-    lastCol         : 'F',                                            
-    insertRange     : 'Data!A1:F1',                                   
+    lastCol         : 'K',                                            
+    insertRange     : 'Data!A1:K1',                                   
     sheetID         : '0'     //** Ref:https://developers.google.com/sheets/api/guides/concepts#sheet_id
   };
   return varArray;
@@ -96,6 +96,11 @@ function getFormValues(formObject){
     var values = [[formObject.RecId.toString(),
                   formObject.clientID,
                   formObject.zipCode,
+                  formObject.insuranceCompany,
+                  formObject.insurancePlan,
+                  formObject.feeScheduleType,
+                  formObject.feeScheduleID,
+                  formObject.effectiveDate,
                   formObject.D0120,
                   formObject.D0140,
                   formObject.D0145]];
@@ -103,6 +108,11 @@ function getFormValues(formObject){
     var values = [[new Date().getTime().toString(),//https://webapps.stackexchange.com/a/51012/244121
                   formObject.clientID,
                   formObject.zipCode,
+                  formObject.insuranceCompany,
+                  formObject.insurancePlan,
+                  formObject.feeScheduleType,
+                  formObject.feeScheduleID,
+                  formObject.effectiveDate,
                   formObject.D0120,
                   formObject.D0140,
                   formObject.D0145]];
