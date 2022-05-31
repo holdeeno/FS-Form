@@ -7,11 +7,11 @@ function globalVariables() {
   var varArray = {
     spreadsheetId   : '1T97Qi1knLMUVihs_H7kezvU-lE_IpeRm5VSrqRpTsh4', // Staging Area Google Sheet //** Ref: 
     finalSheetId    : '1Gn4ZbeIpD7_rg_fKp4nZdk59A9AKN99XHWlM9zuCH8U', // Final DB Google Sheet //** Ref: 
-    dataRange       : 'Data!A2:K',                                    // All data, minus header row
-    sheetRange      : 'Data!A1:K',                                   // All data, including header row
+    dataRange       : 'Data!A2:R',                                    // All data, minus header row
+    sheetRange      : 'Data!A1:R',                                   // All data, including header row
     idRange         : 'Data!A2:A',                                    
-    lastCol         : 'K',                                            
-    insertRange     : 'Data!A1:K1',                                   
+    lastCol         : 'R',                                            
+    insertRange     : 'Data!A1:R1',                                   
     sheetID         : '0'     //** Ref:https://developers.google.com/sheets/api/guides/concepts#sheet_id
   };
   return varArray;
@@ -103,8 +103,16 @@ function getFormValues(formObject){
                   formObject.effectiveDate,
                   formObject.D0120,
                   formObject.D0140,
-                  formObject.D0145]];
-  }else{
+                  formObject.D0145,
+                  formObject.D0150,
+                  formObject.D0160,
+                  formObject.D0170,
+                  formObject.D0171,
+                  formObject.D0180,
+                  formObject.D0190,
+                  formObject.D0191
+                ]];
+  } else {
     var values = [[new Date().getTime().toString(),//https://webapps.stackexchange.com/a/51012/244121
                   formObject.clientID,
                   formObject.zipCode,
@@ -115,7 +123,15 @@ function getFormValues(formObject){
                   formObject.effectiveDate,
                   formObject.D0120,
                   formObject.D0140,
-                  formObject.D0145]];
+                  formObject.D0145,
+                  formObject.D0150,
+                  formObject.D0160,
+                  formObject.D0170,
+                  formObject.D0171,
+                  formObject.D0180,
+                  formObject.D0190,
+                  formObject.D0191
+                ]];
   }
   return values;
 }
