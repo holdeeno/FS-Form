@@ -5,22 +5,28 @@
     <p class="h4 mb-4 text-center">Fee Schedule Entry Form</p>
     <input type="text" id="RecId" name="RecId" value="" style="display: none"> <!-- This generated a unique record ID --> 
 
-	<div class="form-group">
-		<label for="clientID" class="form-label">Unitas Client ID Number</label>
-		<input type="number" class="form-control" id="clientID" name="clientID">
+	<div class="form-row">
+		<div class="form-group col">
+			<label for="clientID" class="form-label">Unitas Client ID Number</label>
+			<input type="number" class="form-control" id="clientID" name="clientID">
+		</div>
+		<div class="form-group col">
+			<label for="zipCode" class="form-label">Zip Code</label>
+			<input type="number" class="form-control" id="zipCode" name="zipCode">
+		</div>
 	</div>
 
 	<div class="form-group">
 		<label for="d0120">D0120</label>
-		<input type="number" class="form-control" id="D0120" name="D0120" placeholder="0" required>
+		<input type="number" class="form-control" id="D0120" name="D0120" placeholder="0">
 	</div>
   <div class="form-group">
 		<label for="d0140">D0140</label>
-		<input type="number" class="form-control" id="D0140" name="D0140" placeholder="0" required>
+		<input type="number" class="form-control" id="D0140" name="D0140" placeholder="0">
 	</div>
   <div class="form-group">
 		<label for="d0145">D0145</label>
-		<input type="number" class="form-control" id="D0145" name="D0145" placeholder="0" required>
+		<input type="number" class="form-control" id="D0145" name="D0145" placeholder="0">
 	</div>
 
 	<button type="submit" class="btn btn-primary">Submit</button>

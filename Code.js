@@ -7,11 +7,11 @@ function globalVariables() {
   var varArray = {
     spreadsheetId   : '1T97Qi1knLMUVihs_H7kezvU-lE_IpeRm5VSrqRpTsh4', // Staging Area Google Sheet //** Ref: 
     finalSheetId    : '1Gn4ZbeIpD7_rg_fKp4nZdk59A9AKN99XHWlM9zuCH8U', // Final DB Google Sheet //** Ref: 
-    dataRange       : 'Data!A2:E',                                    // All data, minus header row
-    sheetRange      : 'Data!A1:E',                                   // All data, including header row
+    dataRange       : 'Data!A2:F',                                    // All data, minus header row
+    sheetRange      : 'Data!A1:F',                                   // All data, including header row
     idRange         : 'Data!A2:A',                                    
-    lastCol         : 'E',                                            
-    insertRange     : 'Data!A1:E1',                                   
+    lastCol         : 'F',                                            
+    insertRange     : 'Data!A1:F1',                                   
     sheetID         : '0'     //** Ref:https://developers.google.com/sheets/api/guides/concepts#sheet_id
   };
   return varArray;
@@ -95,12 +95,14 @@ function getFormValues(formObject){
   if(formObject.RecId && checkID(formObject.RecId)){
     var values = [[formObject.RecId.toString(),
                   formObject.clientID,
+                  formObject.zipCode,
                   formObject.D0120,
                   formObject.D0140,
                   formObject.D0145]];
   }else{
     var values = [[new Date().getTime().toString(),//https://webapps.stackexchange.com/a/51012/244121
                   formObject.clientID,
+                  formObject.zipCode,
                   formObject.D0120,
                   formObject.D0140,
                   formObject.D0145]];
