@@ -16,6 +16,14 @@
     preventFormSubmit();
   };      
 
+  // AUTOFILL CLIENT FIELDS FROM URL
+  google.script.url.getLocation(function(location) {
+  var queryParams = JSON.stringify(location.parameter);
+  console.log(queryParams);
+  document.getElementById("clientID").value = location.parameters.clientID[0];
+  document.getElementById("zipCode").value = location.parameters.zipCode[0];
+});
+
 
   /*
   # PROCESSING FORM -------------------------------------start--------------------------------------------
@@ -60,6 +68,14 @@
       }
 
       google.script.run.withSuccessHandler(onSuccess).processSecondEntryForm(formObject);
+
+        // AUTOFILL CLIENT FIELDS FROM URL
+        google.script.url.getLocation(function(location) {
+          var queryParams = JSON.stringify(location.parameter);
+          console.log(queryParams);
+          document.getElementById("clientID").value = location.parameters.clientID[0];
+          document.getElementById("zipCode").value = location.parameters.zipCode[0];
+        });
       
     } else if (submitCounter == 3) {
 
