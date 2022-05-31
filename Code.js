@@ -5,8 +5,8 @@ function doGet(request) {
 /* DEFINE GLOBAL VARIABLES */
 function globalVariables() { 
   var varArray = {
-    spreadsheetId   : '1-9gprZ14wbBn5GVivRGupxPNi0PnqYWrKxodrxItScw', // Staging Area Google Sheet //** Ref: https://docs.google.com/spreadsheets/d/1-9gprZ14wbBn5GVivRGupxPNi0PnqYWrKxodrxItScw/edit#gid=0
-    finalSheetId    : '1xIFJA1MUa4ArXQKVJc4UmmqCSMMYH_hsetlZKvNQJB8', // Final DB Google Sheet //** Ref: https://docs.google.com/spreadsheets/d/1xIFJA1MUa4ArXQKVJc4UmmqCSMMYH_hsetlZKvNQJB8/edit#gid=0
+    spreadsheetId   : '1T97Qi1knLMUVihs_H7kezvU-lE_IpeRm5VSrqRpTsh4', // Staging Area Google Sheet //** Ref: 
+    finalSheetId    : '1Gn4ZbeIpD7_rg_fKp4nZdk59A9AKN99XHWlM9zuCH8U', // Final DB Google Sheet //** Ref: 
     dataRange       : 'Data!A2:D',                                    // All data, minus header row
     sheetRange      : 'Data!A1:D',                                   // All data, including header row
     idRange         : 'Data!A2:A',                                    
