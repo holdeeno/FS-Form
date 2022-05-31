@@ -94,14 +94,14 @@ function getFormValues(formObject){
 /* ADD OR REMOVE VARIABLES ACCORDING TO YOUR FORM*/
   if(formObject.RecId && checkID(formObject.RecId)){
     var values = [[formObject.RecId.toString(),
-                  formObject.d0120,
-                  formObject.d0140,
-                  formObject.d0145]];
+                  formObject.D0120,
+                  formObject.D0140,
+                  formObject.D0145]];
   }else{
     var values = [[new Date().getTime().toString(),//https://webapps.stackexchange.com/a/51012/244121
-                  formObject.d0120,
-                  formObject.d0140,
-                  formObject.d0145]];
+                  formObject.D0120,
+                  formObject.D0140,
+                  formObject.D0145]];
   }
   return values;
 }
