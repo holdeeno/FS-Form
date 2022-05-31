@@ -5,8 +5,8 @@ function doGet(request) {
 /* DEFINE GLOBAL VARIABLES */
 function globalVariables() { 
   var varArray = {
-    spreadsheetId   : '1-9gprZ14wbBn5GVivRGupxPNi0PnqYWrKxodrxItScw', // Staging Area Google Sheet
-    finalSheetId    : '1xIFJA1MUa4ArXQKVJc4UmmqCSMMYH_hsetlZKvNQJB8', // Final DB Google Sheet
+    spreadsheetId   : '1-9gprZ14wbBn5GVivRGupxPNi0PnqYWrKxodrxItScw', // Staging Area Google Sheet //** Ref: https://docs.google.com/spreadsheets/d/1-9gprZ14wbBn5GVivRGupxPNi0PnqYWrKxodrxItScw/edit#gid=0
+    finalSheetId    : '1xIFJA1MUa4ArXQKVJc4UmmqCSMMYH_hsetlZKvNQJB8', // Final DB Google Sheet //** Ref: https://docs.google.com/spreadsheets/d/1xIFJA1MUa4ArXQKVJc4UmmqCSMMYH_hsetlZKvNQJB8/edit#gid=0
     dataRange       : 'Data!A2:D',                                    // All data, minus header row
     sheetRange      : 'Data!A1:D',                                   // All data, including header row
     idRange         : 'Data!A2:A',                                    
@@ -73,13 +73,8 @@ function processSecondEntryForm(formObject) {
   var secondEntryFormResponses = [matchingFieldsList, formTwoArray];
   Logger.log(secondEntryFormResponses);
 
-
-  // What if you combine thse two into a single object, and then return the object
-  // Once it's passed to the server, then you can destructure it and save it to two separate variables again
-  // And then you can still use a form loop to hide the fields and a separate loop to fill them
-
-
   return secondEntryFormResponses;
+  
 }
 
 

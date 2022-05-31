@@ -56,9 +56,9 @@
         }
         
       }
-      google.script.run.withSuccessHandler(onSuccess).processSecondEntryForm(formObject);
-      // document.getElementById("myForm").reset();
 
+      google.script.run.withSuccessHandler(onSuccess).processSecondEntryForm(formObject);
+      
     } else if (submitCounter == 3) {
 
       google.script.run.processFinalForm(formObject);
