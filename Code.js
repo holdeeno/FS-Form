@@ -1,5 +1,8 @@
 function doGet(request) {
-  return HtmlService.createTemplateFromFile('Index').evaluate();
+
+  var htmlOutput = HtmlService.createTemplateFromFile('Index');
+  return htmlOutput.evaluate();
+
 }
 
 /* DEFINE GLOBAL VARIABLES */
@@ -27,53 +30,56 @@ const formTwoArray = [];
 # PROCESSING FORM -------------------------------------start--------------------------------------------
 */
 
+
 /* PROCESS INITIAL ENTRY FORM */
-function processInitialEntryForm(formObject){
-  // This is going to insert initial entry form data to the Staging Area Google Sheet
+function processInitialEntryForm(formObject) {
+
+  // This adds the initial entry form response data to the FS Staging Area
   appendData(getFormValues(formObject),globalVariables().spreadsheetId,globalVariables().insertRange);
+
 }
 
 /* PROCESS SECOND ENTRY FORM */
 function processSecondEntryForm(formObject) {  
-  // This is going to insert the second entry form data to the Staging Area Google Sheet
+
+  // This adds the second entry form response data to the FS Staging Area
   appendData(getFormValues(formObject),globalVariables().spreadsheetId,globalVariables().insertRange);
 
-  // This will retrieve all the data from the Staging Area Google Sheet
+  // This will retrieve all the data from the FS Staging Area
   var stagingData = getAllStagingData();
 
-  // Set iterator equal to zero
   var i = 0;
  
   for (var col = 1 ; i < (stagingData[0].length - 1); col++) {
   
-    var fieldName = stagingData[0][col] // This gets the name of the fields we're comparing (header row)
-    var initialFormFieldValue = stagingData[1][col]; // This gets the value for that field from the first submission
-    var secondFormFieldValue = stagingData[2][col]; // This gets the value for that field from the second submission
-    i++; // increment
+    var fieldName = stagingData[0][col] // Get the name of the fields we're comparing (header row)
+    var initialFormFieldValue = stagingData[1][col]; // Get the value for that field from the first submission
+    var secondFormFieldValue = stagingData[2][col]; // Get the value for that field from the second submission
+    i++; // iterate through all columns
 
     if (initialFormFieldValue == secondFormFieldValue) { // If the values from the two submissions match:
 
 
       matchingFieldsList.push(fieldName); // Add the name of that field to our global array 'matchingFieldsList'
-      Logger.log(matchingFieldsList);
+      // Logger.log(matchingFieldsList);
 
       formTwoArray.push([fieldName, secondFormFieldValue]); // Add the field name and it's value to our global array 'formTwoArray'
-      Logger.log(formTwoArray);
+      // Logger.log(formTwoArray);
 
-    } else {
+    } else { // If the values from the two form submissions don't match:
 
         formTwoArray.push([fieldName, null]); // Add the field name and a null value to our global array 'formTwoArray'
-        Logger.log(formTwoArray);
+        // Logger.log(formTwoArray);
     }
 
   }
-  Logger.log(matchingFieldsList);
-  Logger.log(formTwoArray);
+  //Logger.log(matchingFieldsList);
+  // Logger.log(formTwoArray);
 
-  var secondEntryFormResponses = [matchingFieldsList, formTwoArray];
-  Logger.log(secondEntryFormResponses);
+  var secondEntryFormResponses = [matchingFieldsList, formTwoArray]; // Save both of these arrays into one larger array so we can return them to the client side
+  // Logger.log(secondEntryFormResponses);
 
-  return secondEntryFormResponses;
+  return secondEntryFormResponses; 
   
 }
 
@@ -81,17 +87,27 @@ function processSecondEntryForm(formObject) {
 /* PROCESS FINAL ENTRY FORM */
 function processFinalForm(formObject) {
 
-  // This sends the same data to the final DB sheet.
+  // This sends the final form data to the FS Target DB
   appendDataFinalSheet(getFormValues(formObject),globalVariables().finalSheetId,globalVariables().insertRange);
+
+  // clearStagingSheet(); // This function clears the FS Staging Area once the data has been passed to the client side
+
 }
 
 /*
 # PROCESSING FORM ---------------------------------------end------------------------------------------
 */
 
-function getFormValues(formObject){
-/* ADD OR REMOVE VARIABLES ACCORDING TO YOUR FORM*/
-  if (formObject.RecId && checkID(formObject.RecId)) {
+
+/*
+## CURD FUNCTIONS ----------------------------------------------------------------------------------------
+*/
+
+
+/* GET ALL FORM DATA */
+function getFormValues(formObject) {
+
+  if (formObject.RecId && checkID(formObject.RecId)) { // Check that records are unique
     var values = [[formObject.RecId.toString(),
                   formObject.clientID,
                   formObject.zipCode,
@@ -869,7 +885,7 @@ function getFormValues(formObject){
                   formObject.D9997, 
                   formObject.D9999,]]; 
   } else {
-    var values = [[new Date().getTime().toString(),//https://webapps.stackexchange.com/a/51012/244121
+    var values = [[new Date().getTime().toString(), //https://webapps.stackexchange.com/a/51012/244121
                   formObject.clientID,
                   formObject.zipCode,
                   formObject.insuranceCompany,
@@ -1646,20 +1662,13 @@ function getFormValues(formObject){
                   formObject.D9997, 
                   formObject.D9999,]]; 
   }
+
   return values;
+
 }
 
-
-
-
-
-/*
-## CURD FUNCTIONS ----------------------------------------------------------------------------------------
-*/
-
-
-/* APPEND DATA TO STAGING AREA SHEET */
-function appendData(values, spreadsheetId,range){
+/* APPEND DATA TO FS Staging Area */ 
+function appendData(values, spreadsheetId,range) {
   var valueRange = Sheets.newRowData();
   valueRange.values = values;
   var appendRequest = Sheets.newAppendCellsRequest();
@@ -1668,8 +1677,8 @@ function appendData(values, spreadsheetId,range){
   var results = Sheets.Spreadsheets.Values.append(valueRange, spreadsheetId, range,{valueInputOption: "RAW"});
 }
 
-/* APPEND DATA TO FINAL SHEET */
-function appendDataFinalSheet(values, finalSheetId,range){
+/* APPEND DATA TO FINAL DB */
+function appendDataFinalSheet(values, finalSheetId,range) {
   var valueRange = Sheets.newRowData();
   valueRange.values = values;
   var appendRequest = Sheets.newAppendCellsRequest();
@@ -1680,22 +1689,27 @@ function appendDataFinalSheet(values, finalSheetId,range){
 
 
 /* READ DATA */
-function readData(spreadsheetId,range){
+function readData(spreadsheetId,range) {
   var result = Sheets.Spreadsheets.Values.get(spreadsheetId, range);
   return result.values;
 }
 
 
 /* UPDATE DATA */
-/* Note - we are not currently using this function */
-function updateData(values,spreadsheetId,range){
+/* Note - this function is not currently being used */
+function updateData(values,spreadsheetId,range) {
   var valueRange = Sheets.newValueRange();
   valueRange.values = values;
   var result = Sheets.Spreadsheets.Values.update(valueRange, spreadsheetId, range, {
   valueInputOption: "RAW"});
 }
 
-
+/* CLEAR STAGING SHEET */
+function clearStagingSheet() {
+  var sheets = SpreadsheetApp.openById(globalVariables().spreadsheetId);
+  sheets.deleteRow(2);
+  sheets.deleteRow(2);
+}
 
 /* 
 ## HELPER FUNCTIONS FOR CRUD OPERATIONS --------------------------------------------------------------
@@ -1703,15 +1717,14 @@ function updateData(values,spreadsheetId,range){
 
 
 /* CHECK FOR EXISTING ID, RETURN BOOLEAN */
-/* Note - we are not currently using this function */
-function checkID(ID){
+/* Note - this function is not currently being used  */
+function checkID(ID) {
   var idList = readData(globalVariables().spreadsheetId,globalVariables().idRange,).reduce(function(a,b){return a.concat(b);});
   return idList.includes(ID);
 }
 
-
 /* GET DATA RANGE A1 NOTATION FOR GIVEN ID */
-function getRangeByID(id){
+function getRangeByID(id) {
   if(id){
     var idList = readData(globalVariables().spreadsheetId,globalVariables().idRange);
     for(var i=0;i<idList.length;i++){
@@ -1722,15 +1735,13 @@ function getRangeByID(id){
   }
 }
 
-
 /* GET RECORD BY ID */
-function getRecordById(id){
+function getRecordById(id) {
   if(id && checkID(id)){
     var result = readData(globalVariables().spreadsheetId,getRangeByID(id));
     return result;
   }
 }
-
 
 /* GET ROW NUMBER FOR GIVEN ID */
 function getRowIndexByID(id){
@@ -1745,7 +1756,6 @@ function getRowIndexByID(id){
   }
 }
 
-
 /* GET ALL DATA FROM STAGING AREA GOOGLE SHEET (including header row) */
 // This is called inside of processSecondEntryForm()
 function getAllStagingData(){
@@ -1753,15 +1763,12 @@ function getAllStagingData(){
   return data;
 }
 
-function getAllFinalData(){
+/*function getAllFinalData(){
   var data = readData(globalVariables().finalSheetId, globalVariables().sheetRange);
 
   return data;
 }
-
-
-
-
+*/
 
 /*
 ## OTHER HELPERS FUNCTIONS ------------------------------------------------------------------------

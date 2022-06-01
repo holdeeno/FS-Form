@@ -38,7 +38,7 @@
 
   // HANDLE FORM SUBMISSIONS
   var submitCounter = 0; // submitCounter keeps track of the number of form submissions. Set equal to zero on intial form load.
-
+  
   function handleFormSubmit(formObject) {
 
     submitCounter++;
@@ -46,9 +46,14 @@
 
     if (submitCounter == 1) {
 
+      // set default behavior of spinner to hidden
+      // on submit, show the spinner
+      // 
       google.script.run.processInitialEntryForm(formObject);
       document.getElementById("myForm").reset();
       topFunction();
+      alert("Thank you for completing the form. Please re-enter the data again to confirm the values were entered correctly.");
+
 
       // AUTOFILL CLIENT FIELDS FROM URL (again)
       google.script.url.getLocation(function(location) {
@@ -61,7 +66,7 @@
     } else if (submitCounter == 2) {
 
       topFunction();
-      
+
       // This returns the matching field list array if the server-side function 'processSecondEntryForm()' returns succesfully
       function onSuccess(secondEntryFormResponses) { 
         console.log(secondEntryFormResponses);
@@ -86,6 +91,8 @@
       }
 
       google.script.run.withSuccessHandler(onSuccess).processSecondEntryForm(formObject);
+      alert("Thank you for completing the form again. If the values you entered for each field match, then the fields will be hidden. If any fields remain visible, then the values you entered didn't match. Please carefully re-enter values for these field one more time.");
+      alert("It may take a few moments for the fields to hide, please wait before proceeding.");
       
     } else if (submitCounter == 3) {
 
@@ -98,7 +105,10 @@
       myElm.innerText = "Thanks for filling out the form. You can close this window."; // Add message
       document.body.appendChild(myElm);
 
+      google.script.run.clearStagingSheet(); // Clear the FS Staging Area
+
     }
+    
   }
 
   /*
