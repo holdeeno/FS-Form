@@ -5,13 +5,13 @@ function doGet(request) {
 /* DEFINE GLOBAL VARIABLES */
 function globalVariables() { 
   var varArray = {
-    spreadsheetId   : '1T97Qi1knLMUVihs_H7kezvU-lE_IpeRm5VSrqRpTsh4', // Staging Area Google Sheet //** Ref: 
-    finalSheetId    : '1Gn4ZbeIpD7_rg_fKp4nZdk59A9AKN99XHWlM9zuCH8U', // Final DB Google Sheet //** Ref: 
-    dataRange       : 'Data!A2:R',                                    // All data, minus header row
-    sheetRange      : 'Data!A1:R',                                   // All data, including header row
+    spreadsheetId   : '1T97Qi1knLMUVihs_H7kezvU-lE_IpeRm5VSrqRpTsh4', // Staging Area Google Sheet //** Ref: https://docs.google.com/spreadsheets/d/1T97Qi1knLMUVihs_H7kezvU-lE_IpeRm5VSrqRpTsh4/edit#gid=0
+    finalSheetId    : '1VhgdD_13zb0mBVoNCGeGR9sk2HzhCJ4MLvvEWGbyEmo', // Final DB Google Sheet //** Ref: https://docs.google.com/spreadsheets/d/1VhgdD_13zb0mBVoNCGeGR9sk2HzhCJ4MLvvEWGbyEmo/edit#gid=0
+    dataRange       : 'Data!A2:ADA',                                    // All data, minus header row
+    sheetRange      : 'Data!A1:ADA',                                   // All data, including header row
     idRange         : 'Data!A2:A',                                    
-    lastCol         : 'R',                                            
-    insertRange     : 'Data!A1:R1',                                   
+    lastCol         : 'ADA',                                            
+    insertRange     : 'Data!A1:ADA1',                                   
     sheetID         : '0'     //** Ref:https://developers.google.com/sheets/api/guides/concepts#sheet_id
   };
   return varArray;
